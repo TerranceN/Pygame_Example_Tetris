@@ -23,6 +23,10 @@ class GS_Game(GameState):
             self.isAlive = False
         if self.inputHandler.isKeyHit(pygame.K_s):
             self.shape.move((0, 1))
+        if self.inputHandler.isKeyHit(pygame.K_a):
+            self.shape.move((-1, 0))
+        if self.inputHandler.isKeyHit(pygame.K_d):
+            self.shape.move((1, 0))
     def draw(self):
         self.board.draw(self.display)
         self.shape.draw(self.display)

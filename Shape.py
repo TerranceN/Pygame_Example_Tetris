@@ -6,6 +6,7 @@ class Shape:
     shape = None
     board = None
     position = (3, 0)
+    isPlaced = False
     def __init__(self, board, shape):
         self.board = board
         self.shape = shape
@@ -21,7 +22,10 @@ class Shape:
                         self.shape[j][i],
                         pos)
     def move(self, delta):
+        prePosition = self.position
         self.position = (self.position[0] + delta[0], self.position[1] + delta[1])
+        if not self.board.validate(self.shape, self.position):
+            self.position = prePosition
     def rotateCW(self):
         pass
     def rotateCCW(self):

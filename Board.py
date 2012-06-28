@@ -25,8 +25,14 @@ class Board:
             self.board.append([])
             for j in range(self.boardHeight):
                 self.board[i].append(None)
-    def update(self):
-        pass
+    def validate(self, shape, position):
+        for i in range(len(shape)):
+            for j in range(len(shape[i])):
+                if not shape[j][i] == None:
+                    pos = (position[0] + i, position[1] + j)
+                    if pos[1] >= self.boardHeight: return False
+                    if pos[0] < 0 or pos[0] >= self.boardWidth: return False
+        return True
     def draw(self, display):
         for i in range(self.boardWidth):
             for j in range(self.boardHeight):
