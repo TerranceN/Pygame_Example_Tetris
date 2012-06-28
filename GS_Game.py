@@ -21,6 +21,8 @@ class GS_Game(GameState):
     def update(self):
         if self.inputHandler.isKeyDown(pygame.K_ESCAPE):
             self.isAlive = False
+        if self.inputHandler.isKeyHit(pygame.K_w):
+            self.shape.rotateCW();
         if self.inputHandler.isKeyHit(pygame.K_s):
             self.shape.move((0, 1))
         if self.inputHandler.isKeyHit(pygame.K_a):
@@ -55,11 +57,11 @@ class GS_Game(GameState):
         elif randInt == 5:
             return  [[None, None, 'orange']
                     ,['orange', 'orange', 'orange']
-                    ,[]]
+                    ,[None, None, None]]
         elif randInt == 6:
             return  [['blue', None, None]
                     ,['blue', 'blue', 'blue']
-                    ,[]]
+                    ,[None, None, None]]
         elif randInt == 7:
             return  [[None, None, None, None]
                     ,['cyan', 'cyan', 'cyan', 'cyan']

@@ -1,4 +1,5 @@
 import pygame
+import copy
 
 from Board import *
 
@@ -32,6 +33,20 @@ class Shape:
                 self.isPlaced = True
                 self.position = (3, 0)
     def rotateCW(self):
-        pass
+        preShape = copy.deepcopy(self.shape)
+        # transpose
+        for i in range(len(self.shape)):
+            for j in range(i):
+                temp = self.shape[i][j]
+                self.shape[i][j] = self.shape[j][i]
+                self.shape[j][i] = temp
+        # flip horizontally
+        for i in range(len(self.shape)):
+            for j in range(len(self.shape[i]) // 2):
+                temp = self.shape[i][j]
+                self.shape[i][j] = self.shape[i][len(self.shape[i]) - j - 1]
+                self.shape[i][len(self.shape[i]) - j - 1] = temp
+        if not self.board.validate(self.shape, self.position) == 'ok':
+            self.shape = preShape
     def rotateCCW(self):
         for i in range(3) : self.rotateCW()
