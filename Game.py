@@ -17,7 +17,7 @@ class Game:
             add first gamestate
         """
         pygame.init();
-        self.display = pygame.display.set_mode([1280, 720])
+        self.display = pygame.display.set_mode([200, 400])
         self.clock = pygame.time.Clock()
         self.gamestateStack.append(GS_Game(self.display))
     def run(self):
