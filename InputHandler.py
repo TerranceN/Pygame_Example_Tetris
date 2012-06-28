@@ -25,7 +25,7 @@ class InputHandler:
             self.keysDownOnce.append(key)
     def __remove(self, lst, key):
         newKeys = []
-        for currentKey in self.keysDown:
-            if currentKey != key:
+        for currentKey in lst:
+            if not currentKey == key:
                 newKeys.append(currentKey)
         return newKeys

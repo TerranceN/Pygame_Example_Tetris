@@ -9,6 +9,7 @@ class GS_Game(GameState):
     inputHandler = InputHandler()
     board = None
     shape = None
+    movementTime = 0
     def __init__(self, display):
         GameState.__init__(self, display)
         self.board = Board()
@@ -27,6 +28,9 @@ class GS_Game(GameState):
             self.shape.move((-1, 0))
         if self.inputHandler.isKeyHit(pygame.K_d):
             self.shape.move((1, 0))
+        if pygame.time.get_ticks() > self.movementTime:
+            self.shape.move((0, 1))
+            self.movementTime = pygame.time.get_ticks() + 200
     def draw(self):
         self.board.draw(self.display)
         self.shape.draw(self.display)

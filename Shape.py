@@ -24,8 +24,13 @@ class Shape:
     def move(self, delta):
         prePosition = self.position
         self.position = (self.position[0] + delta[0], self.position[1] + delta[1])
-        if not self.board.validate(self.shape, self.position):
+        result = self.board.validate(self.shape, self.position)
+        if not result == 'ok':
             self.position = prePosition
+            if result == 'placed':
+                self.board.place(self.shape, self.position)
+                self.isPlaced = True
+                self.position = (3, 0)
     def rotateCW(self):
         pass
     def rotateCCW(self):
