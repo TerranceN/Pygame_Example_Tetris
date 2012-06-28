@@ -1,5 +1,7 @@
 import pygame
 
+import random
+
 from GameState import *
 from GS_Game import *
 

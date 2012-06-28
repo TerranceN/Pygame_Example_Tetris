@@ -21,32 +21,32 @@ class Board:
         self.blocks.append(Block('orange'))
         self.blocks.append(Block('blue'))
         self.blocks.append(Block('cyan'))
-        for i in range(self.boardWidth):
+        for i in range(self.boardHeight):
             self.board.append([])
-            for j in range(self.boardHeight):
+            for j in range(self.boardWidth):
                 self.board[i].append(None)
     def validate(self, shape, position):
         for i in range(len(shape)):
             for j in range(len(shape[i])):
-                if not shape[j][i] == None:
-                    pos = (position[0] + i, position[1] + j)
+                if not shape[i][j] == None:
+                    pos = (position[0] + j, position[1] + i)
                     if pos[1] >= self.boardHeight: return 'placed'
                     if pos[0] < 0 or pos[0] >= self.boardWidth: return 'invalid'
-                    if not self.board[pos[0]][pos[1]] == None: return 'placed'
+                    if not self.board[pos[1]][pos[0]] == None: return 'placed'
         return "ok"
     def place(self, shape, position):
         for i in range(len(shape)):
             for j in range(len(shape[i])):
-                if not shape[j][i] == None:
-                    pos = (position[0] + i, position[1] + j)
-                    self.board[pos[0]][pos[1]] = shape[j][i]
+                if not shape[i][j] == None:
+                    pos = (position[0] + j, position[1] + i)
+                    self.board[pos[1]][pos[0]] = shape[i][j]
     def draw(self, display):
-        for i in range(self.boardWidth):
-            for j in range(self.boardHeight):
+        for i in range(self.boardHeight):
+            for j in range(self.boardWidth):
                 self.drawBlock(
                         display,
                         self.board[i][j],
-                        (i * self.tileSize, j * self.tileSize))
+                        (j * self.tileSize, i * self.tileSize))
     def drawBlock(self, display, name, position):
         block = self.__getBlock(name)
         if not block == None:
