@@ -1,12 +1,15 @@
 import pygame
 import copy
 
+
 class Block:
     image = None
     name = None
+
     def __init__(self, name):
         self.name = name
         self.image = pygame.image.load('block_' + name + '.png')
+
 
 class Board:
     tileSize = 20
@@ -14,6 +17,7 @@ class Board:
     boardHeight = 20
     board = []
     blocks = []
+
     def __init__(self):
         self.blocks.append(Block('red'))
         self.blocks.append(Block('purple'))
@@ -26,6 +30,7 @@ class Board:
             self.board.append([])
             for j in range(self.boardWidth):
                 self.board[i].append(None)
+
     def validate(self, shape, position):
         for i in range(len(shape)):
             for j in range(len(shape[i])):
@@ -35,6 +40,7 @@ class Board:
                     if pos[0] < 0 or pos[0] >= self.boardWidth: return 'invalid'
                     if not self.board[pos[1]][pos[0]] == None: return 'placed'
         return "ok"
+
     def place(self, shape, position):
         for i in range(len(shape)):
             for j in range(len(shape[i])):
@@ -48,12 +54,14 @@ class Board:
                     isNotEmpty = True
             if isNotEmpty:
                 self.checkForFilledRow(position[1] + i)
+
     def checkForFilledRow(self, row):
         for j in range(len(self.board[row])):
             if self.board[row][j] == None: return
         for currentRow in self.__reverseList(range(row)):
             for j in range(len(self.board[currentRow])):
                 self.board[currentRow+1][j] = self.board[currentRow][j]
+
     def draw(self, display):
         for i in range(self.boardHeight):
             for j in range(self.boardWidth):
@@ -61,14 +69,17 @@ class Board:
                         display,
                         self.board[i][j],
                         (j * self.tileSize, i * self.tileSize))
+
     def drawBlock(self, display, name, position):
         block = self.__getBlock(name)
         if not block == None:
             display.blit(self.__getBlock(name).image, position)
+
     def __getBlock(self, name):
         for block in self.blocks:
             if block.name == name:
                 return block
+
     def __reverseList(self, lst):
         newLst = copy.deepcopy(lst)
         newLst.reverse()
